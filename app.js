@@ -3,7 +3,7 @@ const listing = document.querySelector('.listing')
 const jobs = async () => {
   const fetchData = await fetch('./data.json')
   const data = await fetchData.json()
-  console.log(data)
+  // console.log(data)
 
   data.forEach(job => {
     let language = ''
@@ -15,7 +15,7 @@ const jobs = async () => {
       tool = `<span class="tag">${item}</span>`
     })
     const jobItem = `
-        <div class="job-item ${job.featured && `featured-job`}" id="${job.id}">
+        <div class="job-item ${job.featured ? `featured-job` : ''}" id="${job.id}">
           <div class="logo">
             <img src="${job.logo}" alt="${job.company} Logo" />
           </div>

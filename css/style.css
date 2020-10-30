@@ -6,12 +6,13 @@
 }
 
 .container {
-  margin: 2rem auto;
+  padding: 5rem 0;
+  position: relative;
 }
 
 @media (max-width: 900px) {
   .container {
-    margin: 4rem auto;
+    padding: 4rem auto;
   }
 }
 
@@ -20,7 +21,7 @@
 }
 
 .container .job-item {
-  margin: 0 auto 0.5rem;
+  margin: 0 auto 1.5rem;
   width: 100%;
   height: 150px;
   border-radius: 5px;
@@ -47,6 +48,7 @@
             align-items: unset;
     padding: 0 1rem;
     position: relative;
+    margin-bottom: 3rem;
   }
 }
 
@@ -192,6 +194,58 @@
   .container .job-item .job-tags .tag {
     margin: 0 0.8rem 0.8rem 0;
   }
+}
+
+.filter {
+  margin: 0 auto 1.5rem;
+  width: 100%;
+  height: 100px;
+  border-radius: 5px;
+  background: white;
+  -webkit-box-shadow: 0px 0px 10px 10px rgba(91, 164, 164, 0.1);
+          box-shadow: 0px 0px 10px 10px rgba(91, 164, 164, 0.1);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: absolute;
+  top: 0;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  padding: 1rem 2rem;
+}
+
+@media (max-width: 900px) {
+  .filter {
+    height: auto;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: unset;
+        -ms-flex-align: unset;
+            align-items: unset;
+    padding: 0 1rem;
+    position: relative;
+    margin-bottom: 3rem;
+  }
+}
+
+.filter .item {
+  padding: 0.6rem 0.7rem;
+  border-radius: 5px;
+  background: #effafa;
+  color: #5ba4a4;
+  font-weight: 500;
+  font-size: 0.8rem;
+  margin-right: 1rem;
+}
+
+.invisible {
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
 * {
