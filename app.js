@@ -7,11 +7,11 @@ const jobs = async () => {
 
   data.forEach(job => {
     let language = ''
-    const lang = job.languages.forEach(item => {
+    job.languages.forEach(item => {
       language = `<span class="tag">${item}</span>`
     })
     let tool = ''
-    const tools = job.tools.forEach(item => {
+    job.tools.forEach(item => {
       tool = `<span class="tag">${item}</span>`
     })
     const jobItem = `
@@ -51,7 +51,43 @@ const jobs = async () => {
 
   })
 
+  const filterBox = document.querySelector('.filter')
+  const job = document.querySelectorAll('.job-item')
+  let filters = []
 
+  listing.addEventListener('click', e => {
+    console.log(e.target)
+    const filterTag = e.target
+    if (filterTag.classList.contains('tag')) {
+      const filterParam = filterTag.textContent
+      if (!filters.includes(filterParam)) {
+        filterBox.classList.remove('invisible')
+        filters.push(filterParam)
+      } else {
+        const index = filters.indexOf(filterParam)
+        if (index > -1) { filters.splice(index, 1) }
+      }
+      console.log(filters)
+    }
+
+
+    [...job].forEach(j => {
+      if (filters.every(filter => j.textContent.includes(filter))) {
+        j.style.background = 'white'
+        j.style.display = 'flex'
+
+      } else {
+        j.style.background = 'red'
+        j.style.display = 'none'
+      }
+    })
+    filterBox.innerHTML = ''
+    filters.forEach(filter => {
+
+      const item = `<span class="item">${filter}</span>`
+      filterBox.innerHTML += item
+    })
+  })
 }
 
 
