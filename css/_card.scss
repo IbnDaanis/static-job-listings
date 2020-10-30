@@ -1,9 +1,9 @@
 .container {
-  padding: 5rem 0;
+  padding: 0 0 5rem;
   position: relative;
 
   @media(max-width: 900px) {
-    padding: 4rem auto;
+    padding: 0 0 4rem;
   }
 
   .featured-job {
@@ -100,6 +100,13 @@
         h2 {
           font-size: 1.1rem;
           font-weight: 600;
+          color: $very-dark-grayish-cyan;
+          transition: all 0.2s ease-in-out;
+          cursor: pointer;
+
+          &:hover {
+            color: $desaturated-dark-cyan;
+          }
         }
       }
 
@@ -131,13 +138,19 @@
 
       .tag {
         font-size: 0.8rem;
-        font-weight: 500;
+        font-weight: 600;
         margin-left: 0.5rem;
         padding: 0.5rem 0.6rem;
         border-radius: 5px;
         background: $light-grayish-cyan-tablets;
         color: $desaturated-dark-cyan;
         cursor: pointer;
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+          background: $desaturated-dark-cyan;
+          color: $light-grayish-cyan-tablets;
+        }
 
         @media(max-width:900px) {
           margin: 0 0.8rem 0.8rem 0;
@@ -148,36 +161,94 @@
 }
 
 .filter {
-  margin: 0 auto 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  margin: 0 auto 1rem;
+  transform: translateY(-50%);
   width: 100%;
   height: 72px;
   border-radius: 5px;
   background: white;
   box-shadow: 0px 0px 10px 10px hsla(180, 29%, 50%, 0.1);
-  display: flex;
-  align-items: center;
-  position: absolute;
-  top: 0;
-  transform: translateY(-50%);
   padding: 1rem 2rem;
+  z-index: 1;
 
   @media(max-width: 900px) {
-    height: auto;
-    flex-direction: column;
-    align-items: unset;
-    padding: 0 1rem;
-    position: relative;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
+    height: min-content;
   }
 
-  .item {
-    padding: 0.6rem 0.7rem;
-    border-radius: 5px;
-    background: $light-grayish-cyan;
+  .filterBox {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    @media(max-width: 900px) {
+      height: min-content;
+      flex-wrap: wrap;
+    }
+
+    .item {
+      height: 32px;
+      border-radius: 5px;
+      overflow: hidden;
+      background: $light-grayish-cyan;
+      color: $desaturated-dark-cyan;
+      cursor: pointer;
+      outline: none;
+      border: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0.4rem 1rem 0.4rem 0;
+
+      &:hover .x {
+        background: $very-dark-grayish-cyan;
+      }
+
+      .text {
+        p {
+          font-weight: 500;
+          font-size: 0.8rem;
+          width: fit-content;
+          text-align: center;
+          padding: 0 0.5rem;
+        }
+      }
+
+      .x {
+        background: $desaturated-dark-cyan;
+        color: $light-grayish-cyan;
+        height: 100%;
+        width: 30px;
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.2s ease-in-out;
+
+        p {
+          font-weight: 700;
+          font-size: 0.8rem;
+          width: fit-content;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  p {
+    font-size: 0.9rem;
     color: $desaturated-dark-cyan;
-    font-weight: 500;
-    font-size: 0.8rem;
-    margin-right: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 1rem 1.5rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 

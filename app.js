@@ -51,17 +51,21 @@ const jobs = async () => {
 
   })
 
-  const filterBox = document.querySelector('.filter')
+  const filterContainer = document.querySelector('.filter')
+  const filterBox = document.querySelector('.filterBox')
   const job = document.querySelectorAll('.job-item')
   let filters = []
 
   listing.addEventListener('click', e => {
-    console.log(e.target)
-    const filterTag = e.target
-    if (filterTag.classList.contains('tag')) {
-      const filterParam = filterTag.textContent
+    const target = e.target
+
+    if (target.textContent === 'Clear') {
+      filters = []
+    }
+    if (target.classList.contains('tag')) {
+      const filterParam = target.textContent
       if (!filters.includes(filterParam)) {
-        filterBox.classList.remove('invisible')
+        filterContainer.classList.remove('invisible')
         filters.push(filterParam)
       } else {
         const index = filters.indexOf(filterParam)
@@ -70,23 +74,38 @@ const jobs = async () => {
       console.log(filters)
     }
 
+    if (filters.includes(target.dataset.tag)) {
+      const filterParam = target.dataset.tag
+      console.log(filterParam)
+      if (filters.includes(filterParam)) {
+        const index = filters.indexOf(filterParam)
+        if (index > -1) { filters.splice(index, 1) }
+      }
+    }
 
     [...job].forEach(j => {
       if (filters.every(filter => j.textContent.includes(filter))) {
-        j.style.background = 'white'
         j.style.display = 'flex'
 
       } else {
-        j.style.background = 'red'
         j.style.display = 'none'
       }
     })
     filterBox.innerHTML = ''
     filters.forEach(filter => {
-
-      const item = `<span class="item">${filter}</span>`
+      const item = `
+        <div class="item" data-tag="${filter}">
+          <div class="text" data-tag="${filter}">
+            <p data-tag="${filter}">${filter}</p>
+          </div>
+          <div class="x" data-tag="${filter}">
+            <img src="./images/icon-remove.svg" alt="Remove Icon" data-tag="${filter}"/>
+          </div>
+        </div>
+        `
       filterBox.innerHTML += item
     })
+    if (!filters.length) { filterContainer.classList.add('invisible') }
   })
 }
 
