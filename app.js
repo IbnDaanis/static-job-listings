@@ -7,12 +7,12 @@ const jobs = async () => {
 
   data.forEach(job => {
     let language = ''
-    job.languages.forEach(item => {
-      language = `<span class="tag">${item}</span>`
+    const languages = job.languages.forEach(item => {
+      language += `<span class="tag">${item}</span>`
     })
     let tool = ''
-    job.tools.forEach(item => {
-      tool = `<span class="tag">${item}</span>`
+    const tools = job.tools.forEach(item => {
+      tool += `<span class="tag">${item}</span>`
     })
     const jobItem = `
         <div class="job-item ${job.featured ? `featured-job` : ''}" id="${job.id}">
