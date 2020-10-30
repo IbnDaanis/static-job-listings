@@ -15,9 +15,18 @@ body {
   height: fit-content;
   background-color: $desaturated-dark-cyan;
 
+  @media(max-width: 900px) {
+    height: 150px;
+  }
+
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+
+    @media(max-width: 900px) {
+      object-fit: cover;
+    }
+
   }
 }
