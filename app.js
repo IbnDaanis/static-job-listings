@@ -1,18 +1,18 @@
 const listing = document.querySelector('.listing')
 
-const jobs = async () => {
+const fetchAndDisplayJobs = async () => {
   const fetchData = await fetch('./data.json')
   const data = await fetchData.json()
   // console.log(data)
 
   data.forEach(job => {
-    let language = ''
-    const languages = job.languages.forEach(item => {
-      language += `<span class="tag">${item}</span>`
+    let languages = ''
+    job.languages.forEach(item => {
+      languages += `<span class="tag">${item}</span>`
     })
-    let tool = ''
-    const tools = job.tools.forEach(item => {
-      tool += `<span class="tag">${item}</span>`
+    let tools = ''
+    job.tools.forEach(item => {
+      tools += `<span class="tag">${item}</span>`
     })
     const jobItem = `
         <div class="job-item ${job.featured ? `featured-job` : ''}" id="${job.id}">
@@ -41,54 +41,48 @@ const jobs = async () => {
           <div class="job-tags">
             <span class="tag">${job.role}</span>
             <span class="tag">${job.level}</span>
-          ${language}
-          ${tool}
+          ${languages}
+          ${tools}
           </div>
         </div>
     `
-
     listing.innerHTML += jobItem
-
   })
 
   const filterContainer = document.querySelector('.filter')
   const filterBox = document.querySelector('.filterBox')
-  const job = document.querySelectorAll('.job-item')
+  const jobItem = document.querySelectorAll('.job-item')
   let filters = []
 
   listing.addEventListener('click', e => {
     const target = e.target
-
     if (target.textContent === 'Clear') {
       filters = []
     }
     if (target.classList.contains('tag')) {
-      const filterParam = target.textContent
-      if (!filters.includes(filterParam)) {
+      const filterParameter = target.textContent
+      if (!filters.includes(filterParameter)) {
         filterContainer.classList.remove('invisible')
-        filters.push(filterParam)
+        filters.push(filterParameter)
       } else {
-        const index = filters.indexOf(filterParam)
+        const index = filters.indexOf(filterParameter)
         if (index > -1) { filters.splice(index, 1) }
       }
-      console.log(filters)
+      // console.log(filters)
     }
-
     if (filters.includes(target.dataset.tag)) {
-      const filterParam = target.dataset.tag
-      console.log(filterParam)
-      if (filters.includes(filterParam)) {
-        const index = filters.indexOf(filterParam)
+      const filterParameter = target.dataset.tag
+      console.log(filterParameter)
+      if (filters.includes(filterParameter)) {
+        const index = filters.indexOf(filterParameter)
         if (index > -1) { filters.splice(index, 1) }
       }
     }
-
-    [...job].forEach(j => {
-      if (filters.every(filter => j.textContent.includes(filter))) {
-        j.style.display = 'flex'
-
+    [...jobItem].forEach(job => {
+      if (filters.every(filter => job.textContent.includes(filter))) {
+        job.style.display = 'flex'
       } else {
-        j.style.display = 'none'
+        job.style.display = 'none'
       }
     })
     filterBox.innerHTML = ''
@@ -109,5 +103,4 @@ const jobs = async () => {
   })
 }
 
-
-jobs()
+fetchAndDisplayJobs()
