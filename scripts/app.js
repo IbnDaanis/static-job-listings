@@ -1,10 +1,8 @@
 const listing = document.querySelector('.listing')
 
 const fetchAndDisplayJobs = async () => {
-  const fetchData = await fetch('./data.json')
+  const fetchData = await fetch('./data/data.json')
   const data = await fetchData.json()
-  // console.log(data)
-
   data.forEach(job => {
     let languages = ''
     job.languages.forEach(item => {
@@ -15,7 +13,9 @@ const fetchAndDisplayJobs = async () => {
       tools += `<span class="tag">${item}</span>`
     })
     const jobItem = `
-        <div class="job-item ${job.featured ? `featured-job` : ''}" id="${job.id}">
+        <div class="job-item ${job.featured ? `featured-job` : ''}" id="${
+      job.id
+    }">
           <div class="logo">
             <img src="${job.logo}" alt="${job.company} Logo" />
           </div>
@@ -24,7 +24,9 @@ const fetchAndDisplayJobs = async () => {
               <p>${job.company}</p>
               <div class="special-tags">
                 ${job.new ? `<span class="new">New!</span>` : ''}
-                ${job.featured ? `<span class="featured">Featured</span>` : ''}  
+                ${
+                  job.featured ? `<span class="featured">Featured</span>` : ''
+                }  
               </div>
             </div>
             <div class="job-title">
@@ -66,19 +68,22 @@ const fetchAndDisplayJobs = async () => {
         filters.push(filterParameter)
       } else {
         const index = filters.indexOf(filterParameter)
-        if (index > -1) { filters.splice(index, 1) }
+        if (index > -1) {
+          filters.splice(index, 1)
+        }
       }
-      // console.log(filters)
     }
     if (filters.includes(target.dataset.tag)) {
       const filterParameter = target.dataset.tag
       console.log(filterParameter)
       if (filters.includes(filterParameter)) {
         const index = filters.indexOf(filterParameter)
-        if (index > -1) { filters.splice(index, 1) }
+        if (index > -1) {
+          filters.splice(index, 1)
+        }
       }
     }
-    [...jobItem].forEach(job => {
+    ;[...jobItem].forEach(job => {
       if (filters.every(filter => job.textContent.includes(filter))) {
         job.style.display = 'flex'
       } else {
@@ -99,7 +104,9 @@ const fetchAndDisplayJobs = async () => {
         `
       filterBox.innerHTML += item
     })
-    if (!filters.length) { filterContainer.classList.add('invisible') }
+    if (!filters.length) {
+      filterContainer.classList.add('invisible')
+    }
   })
 }
 
